@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Game
-//
-//  Created by Алексей Чумаков on 15.02.2024.
-//
-
 import UIKit
 
 @main
