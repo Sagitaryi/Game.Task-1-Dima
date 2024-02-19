@@ -1,21 +1,29 @@
-import Foundation
+import UIKit
 
 struct Player {
   let id: Int
   let nickName: String
+  let personageImage: UIImage
   let classSelection: PersonageClass
   var healthPoints: Int {
-    return Int.random(in: 50...100)
+    get {
+      return Int.random(in: 50...100)
+    }
+    set {
+//      self.healthPoints = newValue
+    }
   }
   var isWeaponRightHand: Bool
-  
-  init(nickName: String = "Player1", classSelection: PersonageClass, isWeaponRightHand: Bool = true) {
+  var isAlive = true
+
+  init(nickName: String = "Player1", personageImage: UIImage = UIImage(), classSelection: PersonageClass = .warrior, isWeaponRightHand: Bool = true) {
     self.id = Player.createIDPlayer()
     self.nickName = nickName
+    self.personageImage = personageImage
     self.classSelection = classSelection
     self.isWeaponRightHand = isWeaponRightHand
   }
-  
+
   static func createIDPlayer() -> Int {
     return Int.random(in: 100_000...999_999)
   }
@@ -26,7 +34,7 @@ extension Player {
     case warrior = "Warrior"
     case mage = "Mage"
     case druid = "Druid"
-    
+
     static func getAllPersonages(array: inout [PersonageClass]) {
       for element in PersonageClass.allCases {
         array.append(element)

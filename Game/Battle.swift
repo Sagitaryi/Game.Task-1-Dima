@@ -1,19 +1,52 @@
 import Foundation
 
-struct Buttle {
+struct Battle {
   static var firstPlayer: Player?
   static var secondPlayer: Player?
-}
+  static var tempPersonage = Player()
+  var playerAttacksFirst: Int {
+    get {
+      Int.random(in: 1...2)
+    }
+    set { }
+  }
+  mutating func makeAttack() -> String {
+    let attack = Weapon()
+    let damage = attack.hitAndDamageCalculation()
+    print(Battle.tempPersonage)
+    if damage == 0 {
+      print("промах")
+      return ("промах")
+    } else {
+      Battle.firstPlayer?.healthPoints -= damage
+      let firstValueHeathPoints = Battle.secondPlayer?.healthPoints ?? 0
+      if firstValueHeathPoints > 0 {
+        print("firstValueHeathPoints\(firstValueHeathPoints)")
+        print("The second player dealt \(damage) points of damage")
+        return "The second player dealt \(damage) points of damage"
+      } else {
+        print("The second player wins")
+        return "The second player wins"
+      }
+    }
 
-//Сделаем сущность `Battle`
-//Она должен будет принимать 2-х игроков. Далее они буду использовать оружие и поражать друг друга по принципу дуэли.
-//
-//Должен быть метод по типа:
-//
-//```swift
-//func processStep() → Bool {
-//    ...
-//}
-//```
-//
-//В результате его будет рассчитываться один игрок поражает другого и потом другой 1-го. Результатом будет - продолжать ? Те еще есть живой или нет)
+
+
+    //    if playerAttacksFirst == 1 {
+    //      playerAttacksFirst = 2
+    //      Battle.secondPlayer?.healthPoints -= damage.hitAndDamageCalculation()
+    //      let firstValueHeathPoints = Battle.secondPlayer?.healthPoints ?? 0
+    //      if  firstValueHeathPoints < 0 {
+    //        Battle.secondPlayer?.isAlive = false
+    //
+    //        func attack(playerHealthPoints: inout Battle) {
+    //
+    //        }
+    //      }
+    //
+    //    } else {
+    //      Battle.firstPlayer?.healthPoints -= damage.hitAndDamageCalculation()
+    //      playerAttacksFirst = 1
+    //    }
+  }
+}

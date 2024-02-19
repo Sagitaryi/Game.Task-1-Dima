@@ -1,6 +1,6 @@
 import UIKit
 
-class FirstPlayerVC: UIViewController {
+class PlayerVC: UIViewController {
 
   // MARK: - IBOutlets
   @IBOutlet weak var nicknameTextField: UITextField!
@@ -12,6 +12,11 @@ class FirstPlayerVC: UIViewController {
   // MARK: - let/var
   var arrayPersonages: [Player.PersonageClass] = []
   var nickName = ""
+  var imagePersonage = UIImage() {
+    didSet {
+      personageImageView.image = imagePersonage
+    }
+  }
   var selectedClass: Player.PersonageClass = .warrior
   var isWeaponRightHand = true {
     didSet {
@@ -39,11 +44,11 @@ class FirstPlayerVC: UIViewController {
 
   @IBAction func nextVCButtonPressed(_ sender: UIButton) {
     if !isFirstPlayerCreated {
-      createPlayer(numberPlayer: &Buttle.firstPlayer)
+      createPlayer(numberPlayer: &Battle.firstPlayer)
       isFirstPlayerCreated = true
       clearingPersonageFields()
     } else {
-      createPlayer(numberPlayer: &Buttle.secondPlayer)
+      createPlayer(numberPlayer: &Battle.secondPlayer)
       navigation()
     }
   }
@@ -54,13 +59,14 @@ class FirstPlayerVC: UIViewController {
   }
 
   func imageSelection() {
-    personageImageView.image = Constants.PersonagesImages.imageSelection(personageClass: selectedClass,
+    imagePersonage = Constants.PersonagesImages.imageSelection(personageClass: selectedClass,
                                                                          isWeaponRightHand: isWeaponRightHand)
   }
 
   func createPlayer(numberPlayer: inout Player?) {
     numberPlayer = Player(
       nickName: nickName,
+      personageImage: imagePersonage,
       classSelection: selectedClass,
       isWeaponRightHand: isWeaponRightHand)
   }
@@ -82,7 +88,7 @@ class FirstPlayerVC: UIViewController {
 }
 
 // MARK: - extensions
-extension FirstPlayerVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension PlayerVC: UIPickerViewDelegate, UIPickerViewDataSource {
   func numberOfComponents(in pickerView: UIPickerView) -> Int { // количество "барабанов"
     1
   }
