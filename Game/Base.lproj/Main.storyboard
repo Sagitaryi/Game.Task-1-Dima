@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,7 +49,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="getNickname:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="gzQ-Uv-mJj"/>
+                                    <action selector="getNickname:" destination="BYZ-38-t0r" eventType="editingChanged" id="jLp-D2-v6O"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weapon in your right hand" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zm6-CK-gqz">
@@ -109,7 +110,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5a-LJ-mGY">
-                                <rect key="frame" x="72" y="91" width="194" height="281"/>
+                                <rect key="frame" x="72" y="91" width="194" height="246"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duel:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ane-kv-LFE">
@@ -120,28 +121,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbn-HA-5Mb">
-                                <rect key="frame" x="370" y="302" width="111" height="35"/>
+                                <rect key="frame" x="389" y="302" width="73" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Take a shot">
+                                <buttonConfiguration key="configuration" style="plain" title="Attack">
                                     <backgroundConfiguration key="background">
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                     </backgroundConfiguration>
                                     <color key="baseForegroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="takeShotButtonPressed:" destination="Ajq-uf-tFV" eventType="touchUpInside" id="4Bb-Rb-8sl"/>
+                                    <action selector="attackButtonPressed:" destination="Ajq-uf-tFV" eventType="touchUpInside" id="54h-Qb-bCx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypp-ro-Jlt">
-                                <rect key="frame" x="340" y="117" width="173" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypp-ro-Jlt">
+                                <rect key="frame" x="340" y="117" width="173" height="158"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AzN-iQ-QHl">
-                                <rect key="frame" x="599" y="91" width="191" height="281"/>
+                                <rect key="frame" x="599" y="91" width="191" height="246"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2k-EB-UuN">
@@ -166,18 +167,35 @@
                                 <rect key="frame" x="619" y="71" width="150" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjr-ta-8ay">
+                                <rect key="frame" x="83" y="351" width="173" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Sm-lb-Jk0">
+                                <rect key="frame" x="608" y="351" width="173" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vEQ-XA-Hbk"/>
                         <color key="backgroundColor" red="0.94126087430000005" green="0.91004353760000001" blue="0.65109199289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="displayingShotResultsLabel" destination="ypp-ro-Jlt" id="QZe-xb-aVf"/>
+                        <outlet property="attackButton" destination="gbn-HA-5Mb" id="xNG-sf-i5g"/>
+                        <outlet property="displayingAttackResultsLabel" destination="ypp-ro-Jlt" id="5LE-gi-pqE"/>
                         <outlet property="firstHeathPointsLabel" destination="o2k-EB-UuN" id="iZJ-ei-eES"/>
                         <outlet property="firstHeathPointsProgressView" destination="9pu-DT-0C3" id="eEy-bR-GpL"/>
+                        <outlet property="firstNicknameLabel" destination="Pjr-ta-8ay" id="Rg3-IG-5cm"/>
                         <outlet property="firstPlayerImageView" destination="K5a-LJ-mGY" id="PZE-EO-tc4"/>
                         <outlet property="secondHealthPointsLabel" destination="VMU-la-Vbp" id="VcD-Nv-sxt"/>
                         <outlet property="secondHeathPointsProgressView" destination="yhQ-pG-5MF" id="Xsr-dO-2Qo"/>
+                        <outlet property="secondNicknameLabel" destination="4Sm-lb-Jk0" id="rsM-C9-D5G"/>
                         <outlet property="secondPlayerImageView" destination="AzN-iQ-QHl" id="q9a-Vx-fdf"/>
                     </connections>
                 </viewController>
@@ -188,7 +206,7 @@
     </scenes>
     <resources>
         <systemColor name="systemTealColor">
-            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

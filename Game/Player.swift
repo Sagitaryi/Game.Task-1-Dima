@@ -2,21 +2,17 @@ import UIKit
 
 struct Player {
   let id: Int
-  let nickName: String
+  let nickName: String?
   let personageImage: UIImage
   let classSelection: PersonageClass
-  var healthPoints: Int {
-    get {
-      return Int.random(in: 50...100)
-    }
-    set {
-//      self.healthPoints = newValue
-    }
-  }
+  var healthPoints: Int = Int.random(in: 50...100)
   var isWeaponRightHand: Bool
   var isAlive = true
 
-  init(nickName: String = "Player1", personageImage: UIImage = UIImage(), classSelection: PersonageClass = .warrior, isWeaponRightHand: Bool = true) {
+  init(nickName: String?,
+       personageImage: UIImage = UIImage(),
+       classSelection: PersonageClass = .warrior,
+       isWeaponRightHand: Bool = true) {
     self.id = Player.createIDPlayer()
     self.nickName = nickName
     self.personageImage = personageImage
@@ -41,7 +37,7 @@ extension Player {
       }
     }
   }
-  
+
 }
 
 // Написать сущность, которая описывает игрока в игре Player:

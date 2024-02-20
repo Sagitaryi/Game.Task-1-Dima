@@ -8,10 +8,10 @@ class PlayerVC: UIViewController {
   @IBOutlet weak var personageImageView: UIImageView!
   @IBOutlet weak var weaponHandSelectionSwitch: UISwitch!
   @IBOutlet weak var mainLabel: UILabel!
-  
+
   // MARK: - let/var
   var arrayPersonages: [Player.PersonageClass] = []
-  var nickName = ""
+  var nickName: String?
   var imagePersonage = UIImage() {
     didSet {
       personageImageView.image = imagePersonage
@@ -60,7 +60,7 @@ class PlayerVC: UIViewController {
 
   func imageSelection() {
     imagePersonage = Constants.PersonagesImages.imageSelection(personageClass: selectedClass,
-                                                                         isWeaponRightHand: isWeaponRightHand)
+                                                               isWeaponRightHand: isWeaponRightHand)
   }
 
   func createPlayer(numberPlayer: inout Player?) {
@@ -73,7 +73,7 @@ class PlayerVC: UIViewController {
 
   func clearingPersonageFields() {
     mainLabel.text = "Create your second Personage:"
-    nicknameTextField.text = ""
+    nicknameTextField.text = nil
     personageClassPicker.selectRow(0, inComponent: 0, animated: false)
     selectedClass = .warrior
     weaponHandSelectionSwitch.isOn = true
@@ -89,22 +89,19 @@ class PlayerVC: UIViewController {
 
 // MARK: - extensions
 extension PlayerVC: UIPickerViewDelegate, UIPickerViewDataSource {
-  func numberOfComponents(in pickerView: UIPickerView) -> Int { // количество "барабанов"
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
     1
   }
 
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    // количество элементов в "барабане"
     return arrayPersonages.count
   }
 
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    // подставить информацию на строку №row барабана из массива
     return arrayPersonages[row].rawValue
   }
 
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    // подставить информацию из строки №row в лэйбл из массива
     selectedClass = arrayPersonages[row]
     imageSelection()
   }
