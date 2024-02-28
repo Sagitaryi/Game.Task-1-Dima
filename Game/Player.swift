@@ -1,42 +1,39 @@
 import UIKit
 
-struct Player {
-    let id: Int
+final class PlayerClass {
+    var id: Int { createIDPlayer() }
     let nickName: String?
-    let personageImage: UIImage
+    let personageImage: UIImage?
     let classSelection: PersonageClass
+    let weapon: Weapon
     var healthPoints: Int = .random(in: 50 ... 100)
-    var isWeaponRightHand: Bool
-    var isAlive = true
+    var isWeaponRightHand: Bool = true
+    var isAlive: Bool { healthPoints > 0 }
 
-    init(nickName: String?,
-         personageImage: UIImage = UIImage(),
-         classSelection: PersonageClass = .warrior,
-         isWeaponRightHand: Bool = true)
-    {
-        id = Player.createIDPlayer()
+    init(nickName: String?, personageImage: UIImage, classSelection: PersonageClass, weapon: Weapon) {
         self.nickName = nickName
         self.personageImage = personageImage
         self.classSelection = classSelection
-        self.isWeaponRightHand = isWeaponRightHand
+        self.weapon = weapon
     }
 
-    static func createIDPlayer() -> Int {
+    private func createIDPlayer() -> Int {
         return Int.random(in: 100_000 ... 999_999)
+    }
+
+    func hit(damage: Int) {
+        healthPoints -= damage
+        if healthPoints < 0 {
+            healthPoints = 0
+        }
     }
 }
 
-extension Player {
+extension PlayerClass {
     enum PersonageClass: String, CaseIterable {
         case warrior = "Warrior"
         case mage = "Mage"
         case druid = "Druid"
-
-        static func getAllPersonages(array: inout [PersonageClass]) {
-            for element in PersonageClass.allCases {
-                array.append(element)
-            }
-        }
     }
 }
 

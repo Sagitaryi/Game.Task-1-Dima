@@ -9,7 +9,7 @@ enum Constants {
         case warriorLeft = "WarriorLeft"
         case warriorRight = "WarriorRight"
 
-        static func imageSelection(personageClass: Player.PersonageClass, isWeaponRightHand: Bool) -> UIImage {
+        static func imageSelection(personageClass: PlayerClass.PersonageClass, isWeaponRightHand: Bool) -> UIImage {
             var imagePersonage: UIImage? = UIImage()
 
             switch personageClass {

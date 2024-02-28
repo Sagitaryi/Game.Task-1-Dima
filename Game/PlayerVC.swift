@@ -11,15 +11,25 @@ class PlayerVC: UIViewController {
 
     // MARK: - let/var
 
-    var arrayPersonages: [Player.PersonageClass] = []
-    var nickName: String?
+    var arrayPersonages: [PlayerClass.PersonageClass] { PlayerClass.PersonageClass.allCases }
+    var nickName: String = ""
     var imagePersonage = UIImage() {
         didSet {
             personageImageView.image = imagePersonage
         }
     }
 
-    var selectedClass: Player.PersonageClass = .warrior
+    var selectedClass: PlayerClass.PersonageClass = .warrior {
+        didSet {
+            weaponPersonages = setWeapons(selectedClass: selectedClass)
+        }
+    }
+
+    var weaponPersonages: Weapon {
+        get { setWeapons(selectedClass: selectedClass) }
+        set {}
+    }
+
     var isWeaponRightHand = true {
         didSet {
             imageSelection()
@@ -32,7 +42,6 @@ class PlayerVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillingArrayPersonages()
         imageSelection()
     }
 
@@ -49,38 +58,63 @@ class PlayerVC: UIViewController {
 
     @IBAction func nextVCButtonPressed(_: UIButton) {
         if !isFirstPlayerCreated {
-            createPlayer(numberPlayer: &Battle.firstPlayer)
+            checkNameAvailability()
+            createPlayer()
             isFirstPlayerCreated = true
             clearingPersonageFields()
         } else {
-            createPlayer(numberPlayer: &Battle.secondPlayer)
+            checkNameAvailability()
+            createPlayer()
             navigation()
         }
     }
 
     // MARK: - flow funcs
 
-    func fillingArrayPersonages() {
-        Player.PersonageClass.getAllPersonages(array: &arrayPersonages)
-    }
-
     func imageSelection() {
         imagePersonage = Constants.PersonagesImages.imageSelection(personageClass: selectedClass,
                                                                    isWeaponRightHand: isWeaponRightHand)
     }
 
-    func createPlayer(numberPlayer: inout Player?) {
-        numberPlayer = Player(
-            nickName: nickName,
-            personageImage: imagePersonage,
-            classSelection: selectedClass,
-            isWeaponRightHand: isWeaponRightHand
-        )
+    func checkNameAvailability() {
+        if nickName.isEmpty {
+            if !isFirstPlayerCreated {
+                nickName = "Player 1"
+            } else {
+                nickName = "Player 2"
+            }
+        }
+    }
+
+    func setWeapons(selectedClass: PlayerClass.PersonageClass) -> Weapon {
+        switch selectedClass {
+        case .warrior:
+            return Armory.sekira
+        case .mage:
+            return Armory.magesStave
+        case .druid:
+            return Armory.druidStave
+        }
+    }
+
+    func createPlayer() {
+        if !isFirstPlayerCreated {
+            BattleClass.firstPlayer = PlayerClass(nickName: nickName,
+                                                  personageImage: imagePersonage,
+                                                  classSelection: selectedClass,
+                                                  weapon: weaponPersonages)
+        } else {
+            BattleClass.secondPlayer = PlayerClass(nickName: nickName,
+                                                   personageImage: imagePersonage,
+                                                   classSelection: selectedClass,
+                                                   weapon: weaponPersonages)
+        }
     }
 
     func clearingPersonageFields() {
         mainLabel.text = "Create your second Personage:"
-        nicknameTextField.text = nil
+        nicknameTextField.text = ""
+        nickName = ""
         personageClassPicker.selectRow(0, inComponent: 0, animated: false)
         selectedClass = .warrior
         weaponHandSelectionSwitch.isOn = true

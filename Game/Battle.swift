@@ -1,46 +1,24 @@
 import Foundation
 
-struct Battle {
-    static var firstPlayer: Player?
-    static var secondPlayer: Player?
+class BattleClass {
+    static var firstPlayer: PlayerClass?
+    static var secondPlayer: PlayerClass?
     static var playerNumberAttacks = Int.random(in: 1 ... 2)
 
-    mutating func callAttack() -> String {
-        let attack = Weapon()
-        let damage = attack.hitAndDamageCalculation()
-        var firsNickName = ""
-        var secondNickname = ""
-
-        if Battle.playerNumberAttacks == 1 {
-            firsNickName = Battle.firstPlayer?.nickName ?? String(Battle.playerNumberAttacks)
-            Battle.playerNumberAttacks = 2
-            secondNickname = Battle.secondPlayer?.nickName ?? String(Battle.playerNumberAttacks)
-            return makeAttack(player: &Battle.firstPlayer, attackingPlayer: secondNickname, attackedPlayer: firsNickName)
+    class func processStep() -> (nicknameAttackingPlayer: String, damage: Int, nicknameAttackedPlayer: String) {
+        if playerNumberAttacks == 1 {
+            let damage = firstPlayer?.weapon.hitAndDamageCalculation() ?? 0
+            secondPlayer?.hit(damage: damage)
+            playerNumberAttacks = 2
+            return (firstPlayer?.nickName ?? "-", damage, secondPlayer?.nickName ?? "-")
         } else {
-            secondNickname = Battle.secondPlayer?.nickName ?? String(Battle.playerNumberAttacks)
-            Battle.playerNumberAttacks = 1
-            firsNickName = Battle.firstPlayer?.nickName ?? String(Battle.playerNumberAttacks)
-            return makeAttack(player: &Battle.secondPlayer, attackingPlayer: firsNickName, attackedPlayer: secondNickname)
-        }
-
-        func makeAttack(player: inout Player?, attackingPlayer: String, attackedPlayer: String) -> String {
-            if damage == 0 {
-                return "Player \(attackingPlayer) missed"
-            } else {
-                player?.healthPoints -= damage
-                let valueHeathPoints = player?.healthPoints ?? 0
-                if valueHeathPoints > 0 {
-                    return "Player \(attackingPlayer) dealt \(damage) points of damage to player \(attackedPlayer)"
-                } else {
-                    player?.healthPoints = 0
-                    player?.isAlive = false
-                    return "The player \(attackingPlayer) wins!"
-                }
-            }
+            let damage = secondPlayer?.weapon.hitAndDamageCalculation() ?? 0
+            firstPlayer?.hit(damage: damage)
+            playerNumberAttacks = 1
+            return (secondPlayer?.nickName ?? "-", damage, firstPlayer?.nickName ?? "-")
         }
     }
 }
-
 // Сделаем сущность `Battle`
 // Она должен будет принимать 2-х игроков. Далее они буду использовать оружие и поражать друг друга по принципу дуэли.
 //

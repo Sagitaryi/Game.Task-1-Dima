@@ -24,57 +24,63 @@ class DuelVC: UIViewController {
         super.viewDidLoad()
         setPlayersImages()
         setPlayersNicknames()
-        displayHeathPoints()
+        displayHealthPoints()
     }
 
     // MARK: - IBActions
 
     @IBAction func attackButtonPressed(_: UIButton) {
-        var battle = Battle()
-        displayingAttackResultsLabel.text = battle.callAttack()
-        displayHeathPoints()
-        checkWhichPlayerLost()
+        showImpactResults()
+        displayHealthPoints()
     }
 
     // MARK: - flow funcs
 
     func setPlayersImages() {
-        if let firstPlayerImage = Battle.firstPlayer?.personageImage {
+        if let firstPlayerImage = BattleClass.firstPlayer?.personageImage {
             firstPlayerImageView.image = firstPlayerImage
         }
 
-        if let secondPlayerImage = Battle.secondPlayer?.personageImage {
+        if let secondPlayerImage = BattleClass.secondPlayer?.personageImage {
             secondPlayerImageView.image = secondPlayerImage
         }
     }
 
     func setPlayersNicknames() {
-        if let firstNickname = Battle.firstPlayer?.nickName, let secondNickname = Battle.secondPlayer?.nickName {
-            if !firstNickname.isEmpty {
-                firstNicknameLabel.text = firstNickname
-            }
-            if !secondNickname.isEmpty {
-                secondNicknameLabel.text = secondNickname
-            }
+        if let firstNickname = BattleClass.firstPlayer?.nickName {
+            firstNicknameLabel.text = firstNickname
+        }
+
+        if let secondNickname = BattleClass.secondPlayer?.nickName {
+            secondNicknameLabel.text = secondNickname
         }
     }
 
-    func displayHeathPoints() {
-        if let firstHealthPoints = Battle.firstPlayer?.healthPoints {
+    func displayHealthPoints() {
+        if let firstHealthPoints = BattleClass.firstPlayer?.healthPoints {
             firstHeathPointsLabel.text = "Healts points: \(firstHealthPoints)"
             firstHeathPointsProgressView.progress = Float(firstHealthPoints) * 0.01
         }
-        if let secondHealthPoints = Battle.secondPlayer?.healthPoints {
+        if let secondHealthPoints = BattleClass.secondPlayer?.healthPoints {
             secondHealthPointsLabel.text = "Healts points: \(secondHealthPoints)"
             secondHeathPointsProgressView.progress = Float(secondHealthPoints) * 0.01
         }
     }
 
-    func checkWhichPlayerLost() {
-        let isFirstPlayerDeath = Battle.firstPlayer?.isAlive ?? false
-        let isSecondPlayerDeath = Battle.secondPlayer?.isAlive ?? false
-        if !isFirstPlayerDeath || !isSecondPlayerDeath {
-            attackButton.isEnabled = false
+    func showImpactResults() {
+        let result = BattleClass.processStep()
+        if result.damage != 0 {
+            if BattleClass.firstPlayer?.isAlive ?? false == false {
+                displayingAttackResultsLabel.text = "Player \(result.nicknameAttackingPlayer) win"
+                attackButton.isEnabled = false
+            } else if BattleClass.secondPlayer?.isAlive ?? false == false {
+                displayingAttackResultsLabel.text = "Player \(result.nicknameAttackingPlayer) win"
+                attackButton.isEnabled = false
+            } else {
+                displayingAttackResultsLabel.text = "The \(result.nicknameAttackingPlayer) player dealt \(result.damage) points of damage to the \(result.nicknameAttackedPlayer) player"
+            }
+        } else {
+            displayingAttackResultsLabel.text = "Player \(result.nicknameAttackingPlayer) missed"
         }
     }
 }
