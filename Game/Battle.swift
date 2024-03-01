@@ -5,17 +5,22 @@ class BattleClass {
     static var secondPlayer: PlayerClass?
     static var playerNumberAttacks = Int.random(in: 1 ... 2)
 
-    class func processStep() -> (nicknameAttackingPlayer: String, damage: Int, nicknameAttackedPlayer: String) {
+    class func processStep() -> Attack {
+        var attack = Attack()
         if playerNumberAttacks == 1 {
-            let damage = firstPlayer?.weapon.hitAndDamageCalculation() ?? 0
-            secondPlayer?.hit(damage: damage)
+            attack.damage = firstPlayer?.weapon.hitAndDamageCalculation() ?? 0
+            attack.nicknameAttackingPlayer = firstPlayer?.nickName ?? ""
+            attack.nicknameAttackedPlayer = secondPlayer?.nickName ?? ""
+            secondPlayer?.hit(damage: attack.damage)
             playerNumberAttacks = 2
-            return (firstPlayer?.nickName ?? "-", damage, secondPlayer?.nickName ?? "-")
+            return attack
         } else {
-            let damage = secondPlayer?.weapon.hitAndDamageCalculation() ?? 0
-            firstPlayer?.hit(damage: damage)
+            attack.damage = secondPlayer?.weapon.hitAndDamageCalculation() ?? 0
+            attack.nicknameAttackingPlayer = secondPlayer?.nickName ?? ""
+            attack.nicknameAttackedPlayer = firstPlayer?.nickName ?? ""
+            firstPlayer?.hit(damage: attack.damage)
             playerNumberAttacks = 1
-            return (secondPlayer?.nickName ?? "-", damage, firstPlayer?.nickName ?? "-")
+            return attack
         }
     }
 }
