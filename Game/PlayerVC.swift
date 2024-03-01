@@ -11,7 +11,7 @@ class PlayerVC: UIViewController {
 
     // MARK: - let/var
 
-    var arrayPersonages: [PlayerClass.PersonageClass] { PlayerClass.PersonageClass.allCases }
+    var arrayPersonages = PlayerClass.PersonageClass.allCases
     var nickName: String = ""
     var imagePersonage = UIImage() {
         didSet {
@@ -19,16 +19,7 @@ class PlayerVC: UIViewController {
         }
     }
 
-    var selectedClass: PlayerClass.PersonageClass = .warrior {
-        didSet {
-            weaponPersonages = setWeapons(selectedClass: selectedClass)
-        }
-    }
-
-    var weaponPersonages: Weapon {
-        get { setWeapons(selectedClass: selectedClass) }
-        set {}
-    }
+    var selectedClass: PlayerClass.PersonageClass = .warrior
 
     var isWeaponRightHand = true {
         didSet {
@@ -86,7 +77,7 @@ class PlayerVC: UIViewController {
         }
     }
 
-    func setWeapons(selectedClass: PlayerClass.PersonageClass) -> Weapon {
+    func choiceWeapons(selectedClass: PlayerClass.PersonageClass) -> Weapon {
         switch selectedClass {
         case .warrior:
             return Armory.sekira
@@ -102,12 +93,12 @@ class PlayerVC: UIViewController {
             BattleClass.firstPlayer = PlayerClass(nickName: nickName,
                                                   personageImage: imagePersonage,
                                                   classSelection: selectedClass,
-                                                  weapon: weaponPersonages)
+                                                  weapon: choiceWeapons(selectedClass: selectedClass))
         } else {
             BattleClass.secondPlayer = PlayerClass(nickName: nickName,
                                                    personageImage: imagePersonage,
                                                    classSelection: selectedClass,
-                                                   weapon: weaponPersonages)
+                                                   weapon: choiceWeapons(selectedClass: selectedClass))
         }
     }
 
