@@ -2,7 +2,7 @@ import Foundation
 
 struct Weapon {
     let name: String
-    let weight: Float
+    let weight: Double
     let weaponСlassification: WeaponClass
 
     func hitAndDamageCalculation() -> Int {

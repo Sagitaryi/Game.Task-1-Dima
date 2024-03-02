@@ -1,27 +1,31 @@
 import Foundation
 
-class BattleClass {
-    static var firstPlayer: PlayerClass?
-    static var secondPlayer: PlayerClass?
-    static var playerNumberAttacks = Int.random(in: 1 ... 2)
+final class BattleClass {
+    private let firstPlayer: PlayerClass
+    private let secondPlayer: PlayerClass
+    private var playerNumberAttacks = Int.random(in: 1 ... 2)
+    
+    init(firstPlayer: PlayerClass, secondPlayer: PlayerClass) {
+        self.firstPlayer = firstPlayer
+        self.secondPlayer = secondPlayer
+    }
 
-    class func processStep() -> Attack {
-        var attack = Attack()
+    func processStep() -> AttackResult {
+        var attack = AttackResult()
         if playerNumberAttacks == 1 {
-            attack.damage = firstPlayer?.weapon.hitAndDamageCalculation() ?? 0
-            attack.nicknameAttackingPlayer = firstPlayer?.nickName ?? ""
-            attack.nicknameAttackedPlayer = secondPlayer?.nickName ?? ""
-            secondPlayer?.hit(damage: attack.damage)
+            attack.damage = firstPlayer.weapon.hitAndDamageCalculation()
+            attack.nicknameAttackingPlayer = firstPlayer.nickName ?? ""
+            attack.nicknameAttackedPlayer = secondPlayer.nickName ?? ""
+            secondPlayer.hit(damage: attack.damage)
             playerNumberAttacks = 2
-            return attack
         } else {
-            attack.damage = secondPlayer?.weapon.hitAndDamageCalculation() ?? 0
-            attack.nicknameAttackingPlayer = secondPlayer?.nickName ?? ""
-            attack.nicknameAttackedPlayer = firstPlayer?.nickName ?? ""
-            firstPlayer?.hit(damage: attack.damage)
+            attack.damage = secondPlayer.weapon.hitAndDamageCalculation()
+            attack.nicknameAttackingPlayer = secondPlayer.nickName ?? ""
+            attack.nicknameAttackedPlayer = firstPlayer.nickName ?? ""
+            firstPlayer.hit(damage: attack.damage)
             playerNumberAttacks = 1
-            return attack
         }
+        return attack
     }
 }
 

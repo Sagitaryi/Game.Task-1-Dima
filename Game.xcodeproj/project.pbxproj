@@ -15,7 +15,7 @@
 		5B2579F62B7E5E7F00CAE086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B2579F52B7E5E7F00CAE086 /* Assets.xcassets */; };
 		5B2579F92B7E5E7F00CAE086 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B2579F72B7E5E7F00CAE086 /* LaunchScreen.storyboard */; };
 		5B38BD092B8C630F009F2A8F /* Armory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B38BD082B8C630F009F2A8F /* Armory.swift */; };
-		5B9BFA642B91B65500B3AA07 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9BFA632B91B65500B3AA07 /* Attack.swift */; };
+		5B9BFA642B91B65500B3AA07 /* AttackResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9BFA632B91B65500B3AA07 /* AttackResult.swift */; };
 		5BDAF4A42B80B69C000B6184 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAF4A32B80B69C000B6184 /* Constants.swift */; };
 		5BDAF4AB2B80E42C000B6184 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAF4AA2B80E42C000B6184 /* Weapon.swift */; };
 		5BDAF4B12B80FAE7000B6184 /* DuelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAF4B02B80FAE7000B6184 /* DuelVC.swift */; };
@@ -33,7 +33,7 @@
 		5B2579F82B7E5E7F00CAE086 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B2579FA2B7E5E7F00CAE086 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B38BD082B8C630F009F2A8F /* Armory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armory.swift; sourceTree = "<group>"; };
-		5B9BFA632B91B65500B3AA07 /* Attack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
+		5B9BFA632B91B65500B3AA07 /* AttackResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackResult.swift; sourceTree = "<group>"; };
 		5BDAF4A32B80B69C000B6184 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5BDAF4AA2B80E42C000B6184 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		5BDAF4B02B80FAE7000B6184 /* DuelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelVC.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				5BDAF4AA2B80E42C000B6184 /* Weapon.swift */,
 				5B38BD082B8C630F009F2A8F /* Armory.swift */,
 				5BDAF4B22B81115F000B6184 /* Battle.swift */,
-				5B9BFA632B91B65500B3AA07 /* Attack.swift */,
+				5B9BFA632B91B65500B3AA07 /* AttackResult.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -227,7 +227,7 @@
 				5B1AD9FF2B7F43DB00C2C946 /* Player.swift in Sources */,
 				5BDAF4AB2B80E42C000B6184 /* Weapon.swift in Sources */,
 				5B38BD092B8C630F009F2A8F /* Armory.swift in Sources */,
-				5B9BFA642B91B65500B3AA07 /* Attack.swift in Sources */,
+				5B9BFA642B91B65500B3AA07 /* AttackResult.swift in Sources */,
 				5B2579F12B7E5E7C00CAE086 /* PlayerVC.swift in Sources */,
 				5BDAF4B32B81115F000B6184 /* Battle.swift in Sources */,
 				5BDAF4B12B80FAE7000B6184 /* DuelVC.swift in Sources */,

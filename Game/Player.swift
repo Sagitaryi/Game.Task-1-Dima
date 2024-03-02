@@ -1,13 +1,15 @@
 import UIKit
 
 final class PlayerClass {
-    var id: Int { createIDPlayer() }
+    lazy var id: Int = { createIDPlayer() }()
+    
     let nickName: String?
     let personageImage: UIImage?
     let classSelection: PersonageClass
     let weapon: Weapon
-    var healthPoints: Int = .random(in: 50 ... 100)
-    var isWeaponRightHand: Bool = true
+    
+    private var healthPoints: Int = .random(in: 50 ... 100)
+    var isWeaponRightHand = true
     var isAlive: Bool { healthPoints > 0 }
 
     init(nickName: String?, personageImage: UIImage, classSelection: PersonageClass, weapon: Weapon) {
@@ -15,10 +17,6 @@ final class PlayerClass {
         self.personageImage = personageImage
         self.classSelection = classSelection
         self.weapon = weapon
-    }
-
-    private func createIDPlayer() -> Int {
-        return Int.random(in: 100_000 ... 999_999)
     }
 
     func hit(damage: Int) {
@@ -34,6 +32,13 @@ extension PlayerClass {
         case warrior = "Warrior"
         case mage = "Mage"
         case druid = "Druid"
+    }
+}
+
+private extension PlayerClass {
+    
+    func createIDPlayer() -> Int {
+        Int.random(in: 100_000 ... 999_999)
     }
 }
 
